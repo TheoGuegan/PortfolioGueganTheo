@@ -1,5 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+@keyframes moveUnderline {
+    0% {
+        transform-origin: left;
+        transform: scaleX(0);
+    }
+    50% {
+        transform-origin: left;
+        transform: scaleX(0.5);
+    }
+    100% {
+        transform-origin: right;
+        transform: scaleX(0);
+    }
+}
+
+@keyframes moveUnderlineInvert {
+    0% {
+        transform-origin: right;
+        transform: scaleX(0);
+    }
+    50% {
+        transform-origin: right;
+        transform: scaleX(0.5);
+    }
+    100% {
+        transform-origin: left;
+        transform: scaleX(0);
+    }
+}
 
 body {
     margin: 0;
@@ -14,6 +43,12 @@ nav {
     width: auto;
     height: 100px;
     padding: 10px;
+    margin: 0;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 4;
+
     img {
         height: 100px;
     }
@@ -25,24 +60,44 @@ nav {
             margin-top: 20px;
         }
     }
+    a {
+        color: black;
+        text-decoration: none;
+        &:hover {
+            color: red;
+        }
+    }
+
 }
 
 .banner {
     height: 400px;
-    background: rgba(73, 71, 71, 0.49);
+    background: url(../img/geeks-2894621.jpg) center/cover fixed;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: flex-end;
 
     h1 {
         color: rgb(252, 252, 252);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 5%;
-        font-size: 1.5rem;
-    
-        &:hover {
-            color: black;
+        font-size: 2rem;
+        text-shadow: 6px -4px 0 #f6cece21;
+        margin-right: 2%;
+
+        &.underline-animation {
+            position: relative;
+            display: inline-block;
+        }
+        
+        &.underline-animation::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            transform-origin: left;
+            animation: moveUnderline 2s infinite;
         }
     }
 
@@ -56,12 +111,280 @@ nav {
     }
 }
 
-.competences-details {
-    display: flex;
-    justify-content: space-around;
-    
-    img {
-        height: 30px;
+.titlecontainer {
+    text-align: center;
+    width: 100%;
+    h2 {
+        color: black(252, 252, 252);
+        font-size: 1.5rem;
+        text-shadow: 6px -4px 0 #f6cece21;
+        margin-right: 2%;
+
+        &.underline-animation {
+            position: relative;
+            display: inline-block;
+        }
+        
+        &.underline-animation::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            transform-origin: left;
+            animation: moveUnderline 2s infinite;
+        }
+        &.underline-animation-invert {
+            position: relative;
+            display: inline-block;
+        }
+        
+        &.underline-animation-invert::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            transform-origin: left;
+            animation: moveUnderlineInvert 2s infinite;
+        }
     }
 }
+
+
+.about {
+    margin: 20px 20px 40px 20px;
+    h2 {
+        margin-bottom: 40px;
+        text-align: center;
+        z-index: 5;
+    }
+    img {
+        height: 150px;
+        width: 150px;
+        border-radius: 100%;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto;
+    }
+    #aboutname {
+        text-align: center;
+        #spanname {
+            font-size: larger;
+            color: black;
+        }
+        #spanage {
+            color: rgb(87, 87, 87);
+            font-size: small;
+        }
+    }
+    p {
+        width: 60%;
+        text-align: center;
+        margin: 20px auto;
+        color: #767676;
+    }
+}
+
+.competences {
+    background: url(../img/dirty-1041382.jpg) center/cover;
+
+    h2 {
+        text-align: center;
+        padding-top: 20px;
+        margin-bottom: 50px;
+        z-index: 5;
+    }
+    .competences-details {
+        display: flex;
+        justify-content: space-around;
+        
+        img {
+            height: 30px;
+        }
+    }
+
+    .compfront {
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    
+    .compfront::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 165, 0, 0);
+        transition: background-color 0.3s ease;
+        pointer-events: none;
+        z-index: 1;
+    }
+    
+    .compfront:hover::before {
+        background-color: rgba(255, 165, 0, 0.3);
+    }
+    
+    .compfront img,
+    .compfront h3 {
+        position: relative;
+        z-index: 2;
+    }
+    
+
+    .compback {
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    
+    .compback::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0 153 255 / 0);
+        transition: background-color 0.3s ease;
+        pointer-events: none;
+        z-index: 1;
+    }
+    
+    .compback:hover::before {
+        background-color: rgb(0 153 255 / 23%);
+    }
+    
+    .compback img,
+    .compback h3 {
+        position: relative;
+        z-index: 2;
+    }
+
+    .outils {
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    
+    .outils::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(255 0 0 / 0);
+        transition: background-color 0.3s ease;
+        pointer-events: none;
+        z-index: 1;
+    }
+    
+    .outils:hover::before {
+        background-color: rgb(255 0 0 / 29%);
+    }
+    
+    .outils img,
+    .outils h3 {
+        position: relative;
+        z-index: 2;
+    }
+}
+
+.mestravaux{
+    margin: 20px;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 50px;
+        z-index: 5;
+    }
+
+    .containertravaux {
+        display: flex;
+        flex-wrap: wrap;
+    
+        .kasaproject {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                width: 80%;
+            }
+        }
+
+        .vieuxgrimoire {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                width: 80%;
+            }
+        }
+
+        .sophiebluel {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                width: 80%;
+            }
+        }
+
+        .ninacarducci {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                width: 80%;
+            }
+        }
+        .travauxtext {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            span {
+                display: inline-block;
+                padding: 4px 8px;
+                margin: 0 4px;
+                border: 2px solid #ccc;
+                border-radius: 20px;
+            }
+            p{
+                width: 80%;
+            }
+        }
+    }
+}
+
+.contact {
+    h2 {
+        text-align: center;
+        z-index: 5;
+    }
+
+    li {
+        list-style-type: none;
+    }
+}
+
 

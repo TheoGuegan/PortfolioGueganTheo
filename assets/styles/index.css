@@ -1,4 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@keyframes moveUnderline {
+  0% {
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  50% {
+    transform-origin: left;
+    transform: scaleX(0.5);
+  }
+  100% {
+    transform-origin: right;
+    transform: scaleX(0);
+  }
+}
+@keyframes moveUnderlineInvert {
+  0% {
+    transform-origin: right;
+    transform: scaleX(0);
+  }
+  50% {
+    transform-origin: right;
+    transform: scaleX(0.5);
+  }
+  100% {
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+}
 body {
   margin: 0;
   padding: 0;
@@ -11,6 +39,11 @@ nav {
   width: auto;
   height: 100px;
   padding: 10px;
+  margin: 0;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 4;
 }
 nav img {
   height: 100px;
@@ -23,23 +56,41 @@ nav ul li {
   margin-left: 15px;
   margin-top: 20px;
 }
+nav a {
+  color: black;
+  text-decoration: none;
+}
+nav a:hover {
+  color: red;
+}
 
 .banner {
   height: 400px;
-  background: rgba(73, 71, 71, 0.49);
+  background: url(../img/geeks-2894621.jpg) center/cover fixed;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-end;
 }
 .banner h1 {
   color: rgb(252, 252, 252);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 5%;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  text-shadow: 6px -4px 0 rgba(246, 206, 206, 0.1294117647);
+  margin-right: 2%;
 }
-.banner h1:hover {
-  color: black;
+.banner h1.underline-animation {
+  position: relative;
+  display: inline-block;
+}
+.banner h1.underline-animation::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  transform-origin: left;
+  animation: moveUnderline 2s infinite;
 }
 .banner img {
   height: 250px;
@@ -51,10 +102,251 @@ nav ul li {
   margin-top: 70px;
 }
 
-.competences-details {
+.titlecontainer {
+  text-align: center;
+  width: 100%;
+}
+.titlecontainer h2 {
+  color: black(252, 252, 252);
+  font-size: 1.5rem;
+  text-shadow: 6px -4px 0 rgba(246, 206, 206, 0.1294117647);
+  margin-right: 2%;
+}
+.titlecontainer h2.underline-animation {
+  position: relative;
+  display: inline-block;
+}
+.titlecontainer h2.underline-animation::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: black;
+  transform-origin: left;
+  animation: moveUnderline 2s infinite;
+}
+.titlecontainer h2.underline-animation-invert {
+  position: relative;
+  display: inline-block;
+}
+.titlecontainer h2.underline-animation-invert::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: black;
+  transform-origin: left;
+  animation: moveUnderlineInvert 2s infinite;
+}
+
+.about {
+  margin: 20px 20px 40px 20px;
+}
+.about h2 {
+  margin-bottom: 40px;
+  text-align: center;
+  z-index: 5;
+}
+.about img {
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+.about #aboutname {
+  text-align: center;
+}
+.about #aboutname #spanname {
+  font-size: larger;
+  color: black;
+}
+.about #aboutname #spanage {
+  color: rgb(87, 87, 87);
+  font-size: small;
+}
+.about p {
+  width: 60%;
+  text-align: center;
+  margin: 20px auto;
+  color: #767676;
+}
+
+.competences {
+  background: url(../img/dirty-1041382.jpg) center/cover;
+}
+.competences h2 {
+  text-align: center;
+  padding-top: 20px;
+  margin-bottom: 50px;
+  z-index: 5;
+}
+.competences .competences-details {
   display: flex;
   justify-content: space-around;
 }
-.competences-details img {
+.competences .competences-details img {
   height: 30px;
+}
+.competences .compfront {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px;
+}
+.competences .compfront::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 165, 0, 0);
+  transition: background-color 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.competences .compfront:hover::before {
+  background-color: rgba(255, 165, 0, 0.3);
+}
+.competences .compfront img,
+.competences .compfront h3 {
+  position: relative;
+  z-index: 2;
+}
+.competences .compback {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px;
+}
+.competences .compback::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 153, 255, 0);
+  transition: background-color 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.competences .compback:hover::before {
+  background-color: rgba(0, 153, 255, 0.23);
+}
+.competences .compback img,
+.competences .compback h3 {
+  position: relative;
+  z-index: 2;
+}
+.competences .outils {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px;
+}
+.competences .outils::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0);
+  transition: background-color 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.competences .outils:hover::before {
+  background-color: rgba(255, 0, 0, 0.29);
+}
+.competences .outils img,
+.competences .outils h3 {
+  position: relative;
+  z-index: 2;
+}
+
+.mestravaux {
+  margin: 20px;
+}
+.mestravaux h2 {
+  text-align: center;
+  margin-bottom: 50px;
+  z-index: 5;
+}
+.mestravaux .containertravaux {
+  display: flex;
+  flex-wrap: wrap;
+}
+.mestravaux .containertravaux .kasaproject {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mestravaux .containertravaux .kasaproject img {
+  width: 80%;
+}
+.mestravaux .containertravaux .vieuxgrimoire {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mestravaux .containertravaux .vieuxgrimoire img {
+  width: 80%;
+}
+.mestravaux .containertravaux .sophiebluel {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mestravaux .containertravaux .sophiebluel img {
+  width: 80%;
+}
+.mestravaux .containertravaux .ninacarducci {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mestravaux .containertravaux .ninacarducci img {
+  width: 80%;
+}
+.mestravaux .containertravaux .travauxtext {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+.mestravaux .containertravaux .travauxtext span {
+  display: inline-block;
+  padding: 4px 8px;
+  margin: 0 4px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+}
+.mestravaux .containertravaux .travauxtext p {
+  width: 80%;
+}
+
+.contact h2 {
+  text-align: center;
+  z-index: 5;
+}
+.contact li {
+  list-style-type: none;
 }/*# sourceMappingURL=index.css.map */
